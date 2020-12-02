@@ -1,0 +1,22 @@
+{
+  "name": "budget-calculator",
+  "version": "1.0.0",
+  "description": "budget-Calculator",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maggiedalke/budget-calculator.git"
+  },
+  "author": "Maggie Dalke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maggiedalke/budget-calculator/issues"
+  },
+  "homepage": "https://github.com/maggiedalke/budget-calculator#readme",
+  "dependencies": {
+    "modal-vanilla": "^0.9.0"
+  }
+}
