@@ -2,7 +2,6 @@
 // Author Maggie Dalke
 
 window.addEventListener('load', function () {
-
   // Dom Variables
   const addDescription = document.querySelector('.add__description');
   const addAmount = document.querySelector('.add__value');
@@ -12,20 +11,26 @@ window.addEventListener('load', function () {
   // Functions
   // Setting the budget month and year in the DOM
   function setPageDate() {
-    const todaysDate = new Date()
-    const budgetDateString = todaysDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+    const todaysDate = new Date();
+    const budgetDateString = todaysDate.toLocaleString('default', {
+      month: 'long',
+      year: 'numeric',
+    });
     budgetMonth.innerHTML = budgetDateString;
   }
   setPageDate();
 
-  // Setting date the transactions are entered. 
+  // Setting date the transactions are entered.
   function transactionDate() {
     const todaysDate = new Date();
-    const monthDayYear = (todaysDate.toLocaleString('default', { month: 'short', day: 'numeric' })) + ", " + todaysDate.getFullYear();
+    const monthDayYear =
+      todaysDate.toLocaleString('default', { month: 'short', day: 'numeric' }) +
+      ', ' +
+      todaysDate.getFullYear();
     return monthDayYear;
   }
 
-  // unique id to add to each new instance. 
+  // unique id to add to each new instance.
   let idCounter = 0;
 
   class Transaction {
@@ -45,7 +50,10 @@ window.addEventListener('load', function () {
 
     // Adding a new transaction to the incomeList array or expenseList array
     addNewTransaction() {
-      const transaction = new Transaction(addDescription.value, addAmount.value);
+      const transaction = new Transaction(
+        addDescription.value,
+        addAmount.value
+      );
       if (addAmount.value >= 0) {
         this.incomeList.push(transaction);
       } else {
@@ -61,7 +69,7 @@ window.addEventListener('load', function () {
         return transaction.id === id;
       }
 
-      const foundTrans = transactionArr.find(findTransIndex)
+      const foundTrans = transactionArr.find(findTransIndex);
       if (foundTrans.amount >= 0) {
         const incomeIndex = this.incomeList.findIndex(findTransIndex);
         this.incomeList.splice(incomeIndex, 1);
@@ -77,7 +85,7 @@ window.addEventListener('load', function () {
       let incomeTotal = 0;
       this.incomeList.forEach((income) => {
         incomeTotal = incomeTotal + income.amount;
-      })
+      });
       return incomeTotal;
     }
 
@@ -100,18 +108,18 @@ window.addEventListener('load', function () {
     renderBudgetTotal() {
       const currentBudget = document.querySelector('.budget__value');
       const grandTotal = this.grandTotal();
-      const sign = (grandTotal >= 0) ? "+" : "-";
+      const sign = grandTotal >= 0 ? '+' : '-';
 
-      currentBudget.innerHTML = sign + " $" + Math.abs(grandTotal).toFixed(2);
+      currentBudget.innerHTML = sign + ' $' + Math.abs(grandTotal).toFixed(2);
     }
 
     // Updating the DOM with the new Income total.
     renderIncomeTotal() {
       const currentIncome = document.querySelector('.budget__income--value');
       const incomeTotal = this.incomeTotal();
-      const sign = (incomeTotal >= 0) ? "+" : "";
+      const sign = incomeTotal >= 0 ? '+' : '';
 
-      currentIncome.innerHTML = sign + " $" + Math.abs(incomeTotal).toFixed(2);
+      currentIncome.innerHTML = sign + ' $' + Math.abs(incomeTotal).toFixed(2);
     }
 
     // Updating the DOM with the new Expense total.
@@ -119,19 +127,23 @@ window.addEventListener('load', function () {
       const currentExpense = document.querySelector('.budget__expenses--value');
       const incomeTotal = this.incomeTotal();
       const expenseTotal = this.expenseTotal();
-      const sign = (expenseTotal < 1) ? "-" : "";
-      const expensePercent = document.querySelector('.budget__expenses--percentage');
+      const sign = expenseTotal < 1 ? '-' : '';
+      const expensePercent = document.querySelector(
+        '.budget__expenses--percentage'
+      );
 
-      currentExpense.innerHTML = sign + " $" + Math.abs(expenseTotal).toFixed(2);
+      currentExpense.innerHTML =
+        sign + ' $' + Math.abs(expenseTotal).toFixed(2);
       // Handling condition of NaN.
       if (expenseTotal < 0 && incomeTotal > 0) {
-        expensePercent.innerHTML = parseInt((expenseTotal / incomeTotal) * 100) + "%";
+        expensePercent.innerHTML =
+          parseInt((expenseTotal / incomeTotal) * 100) + '%';
       }
     }
 
-    // Updating the DOM Income List section. 
+    // Updating the DOM Income List section.
     renderIncomeList() {
-      const incomeListEle = document.querySelector(".income__list");
+      const incomeListEle = document.querySelector('.income__list');
 
       // Loops through and removes any children from the Income list DOM section
       while (incomeListEle.firstChild) {
@@ -149,7 +161,7 @@ window.addEventListener('load', function () {
               </div>
           </div>
           <div class="item__date">${income.date}</div>
-          </div>`
+          </div>`;
         incomeListEle.insertAdjacentHTML('beforeend', htmlVariable);
 
         const deleteButton = document.getElementById(`btn-${income.id}`);
@@ -159,9 +171,9 @@ window.addEventListener('load', function () {
       });
     }
 
-    // Updating the DOM Expense List section.  
+    // Updating the DOM Expense List section.
     renderExpenseList() {
-      const expenseListEle = document.querySelector(".expenses__list");
+      const expenseListEle = document.querySelector('.expenses__list');
       const incomeTotal = this.incomeTotal();
       const expenseTotal = this.expenseTotal();
 
@@ -183,18 +195,20 @@ window.addEventListener('load', function () {
         <div class="item__value">- $ ${Math.abs(expense.amount)}</div>
         <div class="item__percentage">${expensePercentage}%</div>
         <div class="item__delete">
-        <button class="item__delete--btn" id="btn-${expense.id}"><i class="ion-ios-close-outline"></i></button>
+        <button class="item__delete--btn" id="btn-${
+          expense.id
+        }"><i class="ion-ios-close-outline"></i></button>
               </div>
           </div>
           <div class="item__date">${expense.date}</div>
-          </div>`
+          </div>`;
         expenseListEle.insertAdjacentHTML('beforeend', htmlVariable);
 
         const deleteButton = document.getElementById(`btn-${expense.id}`);
         deleteButton.addEventListener('click', (e) => {
           this.removeTransaction(expense.id);
         });
-      })
+      });
     }
 
     // Calls all of the render methods.
@@ -211,21 +225,19 @@ window.addEventListener('load', function () {
   let newTranList = new TransactionList();
   newTranList.render();
 
-
   // Event Listeners
 
-  /* Event Listener on the check/submit button 
-  * Will not accept an empty values
-  * Resets the values of description and value to empty an empty string.
-  */
+  /* Event Listener on the check/submit button
+   * Will not accept an empty values
+   * Resets the values of description and value to empty an empty string.
+   */
   addButton.addEventListener('click', (e) => {
-    if (addDescription.value === '' || addAmount.value === "") {
-      alert("Error - Need more info!");
+    if (addDescription.value === '' || addAmount.value === '') {
+      alert('Error - Need more info!');
     } else {
       newTranList.addNewTransaction();
       addDescription.value = '';
       addAmount.value = '';
     }
   });
-
-})
+});
