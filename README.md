@@ -1,18 +1,15 @@
-# budget-calculator
+# Budget-Calculator
 **HOSTED:** https://maggie-budget-calculator.netlify.app/
-Functionality: Create a Budget Calculator where the user can enter and keep track of Income, Expenses and Total Current Budget. 
 
+This repo is a Budget Calculator where the user can enter and keep track of their Income, Expenses and Total Current Budget. 
 
-### Architecture
-Setup your objects using class syntax. You should have at least 2 classes:
+## Development Process
 
-#### TransactionList class:
-The transactionList class tracks all of you individual transactions and contains at least 3 properties:
+I set up 2 classes: 
 
-- incomeList: An array containing all the income transactions
-- expenseList: An array containing all the expense transactions.
-- id: An integer that is used to track each transaction.
-- and at least 2 methods (probably more)
+### TransactionList class:
+The transactionList class tracks all of the individual transactions.
+Some methods included:
 
 **addNewTransaction()** <br>
 A method that will accept some parameters and create a new transaction, insert it into the appropriate list and perform any additional updates required.
@@ -21,17 +18,11 @@ A method that will accept some parameters and create a new transaction, insert i
 A method that will accept some paramters and remove an existing transaction object from the appropriate list of transactions based on it's unique identifier and will perform any additional updates required.
 
 ### Transaction class: 
-This the class used to represent each individual transaction. It should have at least the following properties:
+This the class used to represent each individual transaction. 
 
-- amount: A number which can be used to store the amount of the transaction.
--description: A description to provide some details for why each transaction exists.
--date: A string that represents the date added either in the format Jun. 4th, 2020 or Jun. 4, 2020 (with or without the th)
--id: A unique identifier of each transaction.
+### Funtionality
 
-### Requirements
-Your app should support the following functionality:
-
-- Users should be able to submit an amount and a description in the appropriate fields
+- Users are able to submit an amount and a description in the appropriate fields
 - The amount that is submitted should accept a positive or negative value. If the amount is positive it is an income, while if it is negative, it is a expense.
 - The description and amount cannot be empty, if it is, it must not attempt to create a new Transaction
 - If the form submission is successful create a new line in either the income - in the expense or the income column.
