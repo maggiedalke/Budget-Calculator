@@ -34,4 +34,8 @@ This the class used to represent each individual transaction.
 - Add this Month's date to the top of the page (using JavaScript) as well as to each income and expense item. If you need a little refresher, you can take a look into the documentation Date Object.
 - Be sure to use correct formatting for currency, the amount rounded to 2 decimal places, including a dollar sign ($). All + and - signs are located to the left of the currency sign.
 
+## How to use
+There is an *"Add description* text box where the user must enter a description of the income or expense that they are entering.
+The user will enter the amount in the *"Value"* input. If it is a **positive** number, it will be added to the **Income**; if it is a **negative** number, it will be added to the **Expense**.
+The app will use the data to adjust the **income**, **expenses**, and **total monthly budget**.
 
